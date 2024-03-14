@@ -51,6 +51,9 @@ def convert_all_containers(project_path: str):
         project_path (str): Path to the project's root.
     """
     data_path = common.project_data_path(project_path)
+    if data_path is None:
+        raise ValueError(f"Could not retrieve data root for `{project_path}`")
+
     glob_pattern = os.path.join(data_path, "**", paths.container_properties())
     for container_properties_path in glob(glob_pattern, recursive=True):
         convert_container_associations(container_properties_path)

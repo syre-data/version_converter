@@ -51,7 +51,7 @@ if len(convert_chain) == 0:
     raise ValueError("No conversion to perform.")
 
 if args.project is None:
-    for project in common.project_paths:
+    for project in common.project_paths():
         for convert in convert_chain:
             convert(project)
 else:
