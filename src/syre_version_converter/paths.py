@@ -53,7 +53,7 @@ def config_local_dir() -> str:
     system = get_system()
     if system == "Windows":
         return os.path.join(system_data_dir(), "syre", "syre-local")
-    elif system == "Darmin":
+    elif system == "Darwin":
         return os.path.join(system_data_dir(), "ai.syre.syre-local")
 
     raise RuntimeError("Could not get Syre local config dir for OS")
@@ -67,7 +67,7 @@ def config_desktop_dir() -> str:
     system = get_system()
     if system == "Windows":
         return os.path.join(system_data_dir(), "syre", "syre-desktop")
-    elif system == "Darmin":
+    elif system == "Darwin":
         return os.path.join(system_data_dir(), "ai.syre.syre-desktop")
 
     raise RuntimeError("Could not get Syre desktop config dir for OS")
@@ -81,7 +81,7 @@ def config_project_manifest() -> str:
     system = get_system()
     if system == "Windows":
         return os.path.join(config_local_dir(), "config", "project_manifest.json")
-    elif system == "Darmin":
+    elif system == "Darwin":
         return os.path.join(config_local_dir(), "project_manifest.json")
 
     raise RuntimeError("Could not get Syre project manifest for OS")

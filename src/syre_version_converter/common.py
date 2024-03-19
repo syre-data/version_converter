@@ -29,7 +29,7 @@ def project_paths() -> list[str]:
     Returns:
         list[str]: All registered project paths.
     """
-    with open(paths.config_project_manifest, "r") as f:
+    with open(paths.config_project_manifest(), "r") as f:
         projects = json.load(f)
 
     return projects
