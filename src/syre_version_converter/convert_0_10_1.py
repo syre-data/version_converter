@@ -34,10 +34,13 @@ def convert_container_associations(container_properties_path: str):
     """
     with open(container_properties_path, "r+") as f:
         container = json.load(f)
+        if "analyses" in container:
+            return
+        
         if "scripts" in container:
             container["analyses"] = container.pop("scripts")
         else:
-            container["analyses"] = []
+            container["analyses"] = {}
 
         f.seek(0)
         json.dump(container, f, indent=4)
