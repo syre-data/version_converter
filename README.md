@@ -1,13 +1,14 @@
 # syre_version_converter
 
-[![PyPI - Version](https://img.shields.io/pypi/v/version-converter.svg)](https://pypi.org/project/version-converter)
-[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/version-converter.svg)](https://pypi.org/project/version-converter)
+[![PyPI - Version](https://img.shields.io/pypi/v/syre-version-converter.svg)](https://pypi.org/project/syre-version-converter)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/syre-version-converter.svg)](https://pypi.org/project/syre-version-converter)
 
 -----
 
 **Table of Contents**
 
 - [Installation](#installation)
+- [Use](#use)
 - [License](#license)
 
 ## Installation
@@ -17,6 +18,7 @@ pip install syre-version-converter
 ```
 
 ## Use
+
 Converts Syre versions.
 
 ```python
