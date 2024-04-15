@@ -1,3 +1,13 @@
+"""
+Converts a Syre project from version 0.10.1 to 0.10.2.
+
+# Analysis
++ Moves `.syre/scripts.json` to `.syre/analyses.json`.
++ Adds {"type": "script"} to all existing scripts.
+
+# Containers
++ Renames `Container.scripts` to `Container.analyses`.
+"""
 # %%
 import os
 import json
@@ -9,7 +19,7 @@ from . import paths, common
 # %%
 def convert_project_scripts(base_path: str):
     """Convert project .syre/scripts.json to .syre/analyses.json.
-    Adds entry ["type": "script"] for each script.
+    Adds entry {"type": "script"} for each script.
 
     Args:
         path (str): Path to project folder.
@@ -24,6 +34,10 @@ def convert_project_scripts(base_path: str):
         for analysis in analyses:
             if "type" not in analysis:
                 analysis["type"] = "Script"
+
+        f.seek(0)
+        json.dump(analyses, f, indent=4)
+        f.truncate()
 
 
 def convert_container_associations(container_properties_path: str):
