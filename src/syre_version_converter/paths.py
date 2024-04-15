@@ -3,6 +3,7 @@ import platform
 
 SYRE_FOLDER = ".syre"
 CONTAINER_PROPERTIES_FILE = "container.json"
+ASSETS_FILE = "assets.json"
 
 
 def strip_windows_unc(path: str) -> str:
@@ -129,3 +130,23 @@ def container_properties_of(base_path: str) -> str:
         str: Path to container file.
     """
     return os.path.join(base_path, container_properties())
+
+
+def assets() -> str:
+    """
+    Returns:
+        str: Relative path to an asset file.
+    """
+    return os.path.join(SYRE_FOLDER, ASSETS_FILE)
+
+
+def assets_of(base_path: str) -> str:
+    """Assets file of the base path.
+
+    Args:
+        base_path (str): Path to container folder.
+
+    Returns:
+        str: Path to assets file.
+    """
+    return os.path.join(base_path, assets())

@@ -78,7 +78,7 @@ def convert_all_containers(project_path: str):
 
     glob_pattern = os.path.join(data_path, "**", paths.container_properties())
     for container_properties_path in glob(glob_pattern, recursive=True):
-        logging.info(f"[container_properties_path]")
+        logging.info(f"[{container_properties_path}]")
         convert_container_associations(container_properties_path)
 
 

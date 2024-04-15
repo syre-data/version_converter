@@ -4,15 +4,18 @@ import logging
 import sys
 
 from . import common
+from . import convert_0_10_0
 from . import convert_0_10_1
 
 VERSIONS = [
+    "0.10.0",
     "0.10.1",
-    "0.10.2"
+    "0.10.2",
 ]
 
 CONVERTERS = {
-    "0.10.1": convert_0_10_1.convert
+    "0.10.0": convert_0_10_0.convert,
+    "0.10.1": convert_0_10_1.convert,
 }
 
 def setup_logging(verbose: bool):
