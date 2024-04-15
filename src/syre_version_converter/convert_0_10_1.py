@@ -11,10 +11,12 @@ Converts a Syre project from version 0.10.1 to 0.10.2.
 # %%
 import os
 import json
+import logging
 from glob import glob
 
 from . import paths, common
 
+logger = logging.getLogger(__name__)
 
 # %%
 def convert_project_scripts(base_path: str):
@@ -24,11 +26,13 @@ def convert_project_scripts(base_path: str):
     Args:
         path (str): Path to project folder.
     """
+    logger.info("converting project scripts")
     from_path = os.path.join(base_path, paths.SYRE_FOLDER, "scripts.json")
     analyses_path = paths.project_analyses_of(base_path)
     if  os.path.exists(from_path) and not os.path.exists(analyses_path):
         os.rename(from_path, analyses_path)
 
+    logger.info("adding type to scripts")
     with open(analyses_path, "r+") as f:
         analyses = json.load(f)
         for analysis in analyses:
@@ -41,11 +45,12 @@ def convert_project_scripts(base_path: str):
 
 
 def convert_container_associations(container_properties_path: str):
-    """Renames `container.scripts` to `container.analyses`.
+    """Renames `Container.scripts` to `Container.analyses`.
 
     Args:
         container_properties_path (str): Path to the container's properties file.
     """
+    logging.info("converting Container.scripts to Container.analyses")
     with open(container_properties_path, "r+") as f:
         container = json.load(f)
         if "analyses" in container:
@@ -73,6 +78,7 @@ def convert_all_containers(project_path: str):
 
     glob_pattern = os.path.join(data_path, "**", paths.container_properties())
     for container_properties_path in glob(glob_pattern, recursive=True):
+        logging.info(f"[container_properties_path]")
         convert_container_associations(container_properties_path)
 
 
@@ -82,6 +88,7 @@ def convert(project: str):
     Args:
         project (str): Path to the project.
     """
+    logger.info("[0.10.1]")
     convert_project_scripts(project)
     convert_all_containers(project)
 

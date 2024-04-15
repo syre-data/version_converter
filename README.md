@@ -20,7 +20,7 @@ pip install syre-version-converter
 Converts Syre versions.
 
 ```python
-python -m syre_version_converter
+python -m syre_version_converter <initial_version> <final_version> [-p </path/to/project>]
 ```
 
 ## License

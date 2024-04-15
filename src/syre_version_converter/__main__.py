@@ -1,5 +1,7 @@
 from typing import Callable
 import argparse
+import logging
+import sys
 
 from . import common
 from . import convert_0_10_1
@@ -12,6 +14,17 @@ VERSIONS = [
 CONVERTERS = {
     "0.10.1": convert_0_10_1.convert
 }
+
+def setup_logging(verbose: bool):
+    """Setup logging.
+
+    Args:
+        verbose (bool): Output more info. Changes logger level to logging.INFO.
+    """
+    logging.basicConfig(stream=sys.stdout)
+    if verbose:
+        logger = logging.getLogger()
+        logger.setLevel(logging.INFO)
 
 def convert_chain(initial: str, final: str) -> list[Callable]:
     """Creates a chain of converters
@@ -44,14 +57,19 @@ parser = argparse.ArgumentParser(
 parser.add_argument("initial", help="Current version. (x.y.z)")
 parser.add_argument("final", help="Final version. (x.y.z)")
 parser.add_argument("--project", "-p", help="Only convert the project at the given path.")
+parser.add_argument("--verbose", "-v", action="store_true", help="Output more info.")
 
 args = parser.parse_args()
+setup_logging(args.verbose)
+logger = logging.getLogger(__name__)
+
 convert_chain = convert_chain(args.initial, args.final)
 if len(convert_chain) == 0:
     raise ValueError("No conversion to perform.")
 
 if args.project is None:
     for project in common.project_paths():
+        logger.info(f"[{project}]")
         for convert in convert_chain:
             convert(project)
 else:
