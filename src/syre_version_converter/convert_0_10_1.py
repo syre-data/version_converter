@@ -22,6 +22,8 @@ logger = logging.getLogger(__name__)
 def convert_project_scripts(base_path: str):
     """Convert project .syre/scripts.json to .syre/analyses.json.
     Adds entry {"type": "script"} for each script.
+    Flattens Analysis.path to be a basic path, rather than map
+    with path type.
 
     Args:
         path (str): Path to project folder.
@@ -38,6 +40,13 @@ def convert_project_scripts(base_path: str):
         for analysis in analyses:
             if "type" not in analysis:
                 analysis["type"] = "Script"
+                
+            if isinstance(analysis["path"], dict):
+                if "Relative" not in analysis["path"]:
+                    rid = analysis["rid"]
+                    raise RuntimeError(f"Invalid analysis path for analysis {rid}")
+                
+                analysis["path"] = analysis["path"]["Relative"]
 
         f.seek(0)
         json.dump(analyses, f, indent=4)
