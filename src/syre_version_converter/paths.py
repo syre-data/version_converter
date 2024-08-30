@@ -81,6 +81,20 @@ def config_project_manifest() -> str:
     """
     system = get_system()
     if system == "Windows":
+        return os.path.join(config_local_dir(), "config", "users.json")
+    elif system == "Darwin":
+        return os.path.join(config_local_dir(), "users.json")
+
+    raise RuntimeError("Could not get Syre project manifest for OS")
+
+
+def config_project_manifest() -> str:
+    """
+    Returns:
+        str: Path to the Syre project manifest file.
+    """
+    system = get_system()
+    if system == "Windows":
         return os.path.join(config_local_dir(), "config", "project_manifest.json")
     elif system == "Darwin":
         return os.path.join(config_local_dir(), "project_manifest.json")
