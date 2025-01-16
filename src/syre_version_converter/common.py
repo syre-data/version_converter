@@ -1,6 +1,7 @@
 import os
+import io
 import json
-from typing import Optional
+from typing import Optional, Any
 
 from . import paths
 
@@ -33,3 +34,11 @@ def project_paths() -> list[str]:
         projects = json.load(f)
 
     return projects
+
+
+def json_overwrite(obj: Any, f: io.TextIOWrapper):
+    """Overwrite a file's contents with the JSON serialization of the object.
+    """
+    f.seek(0)
+    json.dump(obj, f, indent=4)
+    f.truncate()
