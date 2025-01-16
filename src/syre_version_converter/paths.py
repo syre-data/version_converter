@@ -2,7 +2,14 @@ import os
 import platform
 
 SYRE_FOLDER = ".syre"
+USER_MANIFEST_FILE = "users.json"
+PROJECT_MANIFEST_FILE = "project_manifest.json"
+LOCAL_CONFIG_FILE = "local_config.json"
+PROJECT_PROPERTIES_FILE = "project.json"
+PROJECT_ANALYSES_FILE = "analyses.json"
+PROJECT_SETTINGS_FILE = "project_settings.json"
 CONTAINER_PROPERTIES_FILE = "container.json"
+CONTAINER_SETTINGS_FILE = "container_settings.json"
 ASSETS_FILE = "assets.json"
 
 
@@ -74,6 +81,20 @@ def config_desktop_dir() -> str:
     raise RuntimeError("Could not get Syre desktop config dir for OS")
 
 
+def config_user_manifest() -> str:
+    """
+    Returns:
+        str: Path to the Syre user manifest file.
+    """    
+    system = get_system()
+    if system == "Windows":
+        return os.path.join(config_local_dir(), "config", USER_MANIFEST_FILE)
+    elif system == "Darwin":
+        return os.path.join(config_local_dir(), USER_MANIFEST_FILE)
+
+    raise RuntimeError("Could not get Syre user manifest for OS")
+
+
 def config_project_manifest() -> str:
     """
     Returns:
@@ -81,25 +102,26 @@ def config_project_manifest() -> str:
     """
     system = get_system()
     if system == "Windows":
-        return os.path.join(config_local_dir(), "config", "users.json")
+        return os.path.join(config_local_dir(), "config", PROJECT_MANIFEST_FILE)
     elif system == "Darwin":
-        return os.path.join(config_local_dir(), "users.json")
+        return os.path.join(config_local_dir(), PROJECT_MANIFEST_FILE)
 
     raise RuntimeError("Could not get Syre project manifest for OS")
 
 
-def config_project_manifest() -> str:
+
+def config_local_settings() -> str:
     """
     Returns:
-        str: Path to the Syre project manifest file.
+        str: Path to the Syre local config file.
     """
     system = get_system()
     if system == "Windows":
-        return os.path.join(config_local_dir(), "config", "project_manifest.json")
+        return os.path.join(config_local_dir(), "config", LOCAL_CONFIG_FILE)
     elif system == "Darwin":
-        return os.path.join(config_local_dir(), "project_manifest.json")
+        return os.path.join(config_local_dir(), LOCAL_CONFIG_FILE)
 
-    raise RuntimeError("Could not get Syre project manifest for OS")
+    raise RuntimeError("Could not get Syre local config for OS")
 
 
 def project_properties_of(base_path: str) -> str:
@@ -111,19 +133,31 @@ def project_properties_of(base_path: str) -> str:
     Returns:
         str: Path to the project's properties file.
     """
-    return os.path.join(base_path, SYRE_FOLDER, "project.json")
+    return os.path.join(base_path, SYRE_FOLDER, PROJECT_PROPERTIES_FILE)
 
 
 def project_analyses_of(base_path: str) -> str:
     """Project analyses file of the base path.
 
     Args:
-        base_path (str): Path to the project;s root folder.
+        base_path (str): Path to the project's root folder.
 
     Returns:
         str: Path to the project's analyses file.
     """
-    return os.path.join(base_path, SYRE_FOLDER, "analyses.json")
+    return os.path.join(base_path, SYRE_FOLDER, PROJECT_ANALYSES_FILE)
+
+
+def project_settings_of(base_path: str) -> str:
+    """Project settings file of the base path.
+
+    Args:
+        base_path (str): Path to the project's root folder.
+
+    Returns:
+        str: Path to the project's settings file.
+    """
+    return os.path.join(base_path, SYRE_FOLDER, PROJECT_SETTINGS_FILE)
 
 
 def container_properties() -> str:
@@ -135,7 +169,27 @@ def container_properties() -> str:
 
 
 def container_properties_of(base_path: str) -> str:
-    """Container file of the base path.
+    """Container properties file of the base path.
+
+    Args:
+        base_path (str): Path to container folder.
+
+    Returns:
+        str: Path to container properties file.
+    """
+    return os.path.join(base_path, container_properties())
+
+
+def container_settings() -> str:
+    """
+    Returns:
+        str: Relative path to a container properties file.
+    """
+    return os.path.join(SYRE_FOLDER, CONTAINER_SETTINGS_FILE)
+
+
+def container_settings_of(base_path: str) -> str:
+    """Container settings file of the base path.
 
     Args:
         base_path (str): Path to container folder.
@@ -143,7 +197,7 @@ def container_properties_of(base_path: str) -> str:
     Returns:
         str: Path to container file.
     """
-    return os.path.join(base_path, container_properties())
+    return os.path.join(base_path, container_settings())
 
 
 def assets() -> str:
