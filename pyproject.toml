@@ -27,9 +27,9 @@ classifiers = [
 dependencies = []
 
 [project.urls]
-Documentation = "https://github.com/syre-data/version-converter#readme"
-Issues = "https://github.com/syre-data/version-converter/issues"
-Source = "https://github.com/syre-data/version-converter"
+Documentation = "https://github.com/syre-data/version_converter#readme"
+Issues = "https://github.com/syre-data/version_converter/issues"
+Source = "https://github.com/syre-data/version_converter"
 
 [tool.hatch.version]
 path = "src/syre_version_converter/__about__.py"
