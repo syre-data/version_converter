@@ -1,5 +1,5 @@
 """
-Converts a Syre project from version 0.10.1 to 0.10.2.
+Converts a Syre project from version `0.10.1` to `0.10.2`.
 
 # Analysis
 + Moves `.syre/scripts.json` to `.syre/analyses.json`.
@@ -76,7 +76,7 @@ def convert_container_associations(container_properties_path: str):
 
 
 def convert_all_containers(project_path: str):
-    """Converts all the Containers in a project from 0.10.1 to 0.10.2.
+    """Converts all the Containers in a project from `0.10.1` to `0.10.2`.
 
     Args:
         project_path (str): Path to the project's root.
@@ -92,7 +92,7 @@ def convert_all_containers(project_path: str):
 
 
 def convert(project: str):
-    """Converts the project located at the given path from 0.10.1 to 0.10.2.
+    """Converts the project located at the given path from `0.10.1` to `0.10.2`.
 
     Args:
         project (str): Path to the project.

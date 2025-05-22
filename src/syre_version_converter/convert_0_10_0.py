@@ -1,5 +1,5 @@
 """
-Converts a Syre project to version 0.10.0.
+Converts a Syre project to version `0.10.0`.
 
 + Changes `.thot` folders to `.syre`
 
@@ -51,7 +51,7 @@ def remove_relative_path_enum(assets_path: str):
 
 
 def convert_all_containers(project_path: str):
-    """Converts all the Containers in a project to 0.10.0.
+    """Converts all the Containers in a project to `0.10.0`.
 
     Args:
         project_path (str): Path to the project's root.
@@ -67,7 +67,7 @@ def convert_all_containers(project_path: str):
 
 
 def convert(project: str):
-    """Converts the project located at the given path to 0.10.0.
+    """Converts the project located at the given path to `0.10.0`.
 
     Args:
         project (str): Path to the project.

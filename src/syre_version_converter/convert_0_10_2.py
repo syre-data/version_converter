@@ -1,5 +1,5 @@
 """
-Converts a Syre project from version 0.10.2 to 0.11.0.
+Converts a Syre project from version `0.10.2` to `0.11.0`.
 
 # Config
 + Changes `users.json` from object to list.
@@ -84,7 +84,7 @@ def convert_local_config():
 
 
 def convert_project_properties(base_path: str):
-    """Converts the Project from 0.10.2 to 0.11.0.
+    """Converts the Project from `0.10.2` to `0.11.0`.
     Moves `creator` and `created` fields into settings.
     Updates `local_version_format` to `0.11.0`.
 
@@ -114,7 +114,7 @@ def convert_project_properties(base_path: str):
 
 
 def convert_all_containers(project_path: str):
-    """Converts all the Containers in a project from 0.10.2 to 0.11.0.
+    """Converts all the Containers in a project from `0.10.2` to `0.11.0`.
     Moves `creator` and `created` fields into settings.
     Converts analysis associations to a list.
     Converts `{ "analyses": { "script": <id>, ... }` to `{ "analyses": { "analysis": <id>, ... }`
@@ -136,7 +136,7 @@ def convert_all_containers(project_path: str):
         
 
 def convert_container(base_path: str):
-    """Converts a Container in a project from 0.10.2 to 0.11.0.
+    """Converts a Container in a project from `0.10.2` to `0.11.0`.
     Moves `creator` and `created` fields into settings.
     Converts analysis associations to a list.
     Converts `{ "analyses": { "script": <id>, ... }` to `{ "analyses": { "analysis": <id>, ... }`
@@ -152,7 +152,7 @@ def convert_container(base_path: str):
     convert_container_permissions(base_path)
     
 def convert_container_properties(base_path: str):
-    """Converts a Container in a project from 0.10.2 to 0.11.0.
+    """Converts a Container in a project from `0.10.2` to `0.11.0`.
     Moves `creator` and `created` fields into settings.
 
     Args:
@@ -182,7 +182,7 @@ def convert_container_properties(base_path: str):
                 raise RuntimeError(f"container {base_path} properties is corrupt")
 
 def convert_container_analysis_associations(base_path: str):
-    """Converts a Container in a project from 0.10.2 to 0.11.0.
+    """Converts a Container in a project from `0.10.2` to `0.11.0`.
     Converts analysis associations to a list.
     Converts `{ "analyses": { "script": <id>, ... }` to `{ "analyses": { "analysis": <id>, ... }`
 
@@ -214,7 +214,7 @@ def convert_container_analysis_associations(base_path: str):
 
 
 def convert_container_assets(base_path: str):
-    """Converts a Container in a project from 0.10.2 to 0.11.0.
+    """Converts a Container in a project from `0.10.2` to `0.11.0`.
     Changes the container's assets from an object to a list.
 
     Args:
@@ -232,7 +232,7 @@ def convert_container_assets(base_path: str):
         
         
 def convert_container_permissions(base_path: str):
-    """Converts a Container in a project from 0.10.2 to 0.11.0.
+    """Converts a Container in a project from `0.10.2` to `0.11.0`.
     Changes the container's permissions from a list to a map.
 
     Args:
@@ -240,7 +240,7 @@ def convert_container_permissions(base_path: str):
         
     Raises:
         ValueError: If permissions are not empty.
-            It appears the permissions could not be associated to a user in 0.10.2,
+            It appears the permissions could not be associated to a user in `0.10.2`,
             so was unsure how to handle if permissions existed.
     """  
     with open(paths.container_settings_of(base_path), "r+") as f:
@@ -262,7 +262,7 @@ def convert_container_permissions(base_path: str):
 
 
 def convert(project: str):
-    """Converts the config and project located at the given path from 0.10.2 to 0.11.0.
+    """Converts the config and project located at the given path from `0.10.2` to `0.11.0`.
 
     Args:
         project (str): Path to the project.
