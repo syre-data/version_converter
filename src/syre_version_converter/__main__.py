@@ -4,11 +4,13 @@ import logging
 import sys
 
 from . import common
+from . import convert_0_9_x
 from . import convert_0_10_0
 from . import convert_0_10_1
 from . import convert_0_10_2
 
 VERSIONS = [
+    "0.9.x",
     "0.10.0",
     "0.10.1",
     "0.10.2",
@@ -16,6 +18,7 @@ VERSIONS = [
 ]
 
 CONVERTERS = {
+    "0.9.x":  convert_0_9_x.convert,
     "0.10.0": convert_0_10_0.convert,
     "0.10.1": convert_0_10_1.convert,
     "0.10.2": convert_0_10_2.convert,
@@ -52,7 +55,13 @@ def convert_chain(initial: str, final: str) -> list[Callable]:
     except ValueError:
         raise ValueError("Invalid final version")
     
-    return [CONVERTERS[version] for version in VERSIONS[initial_idx:final_idx]]
+    if initial == "0.9.x":
+        # handle exceptional case of `0.9.x` translating directly to `0.11.0`.
+        idx_11 = VERSIONS.index("0.11.0")
+        converters_11 = [CONVERTERS[version] for version in VERSIONS[idx_11:final_idx]]
+        return [CONVERTERS["0.9.x"]] + converters_11
+    else:
+        return [CONVERTERS[version] for version in VERSIONS[initial_idx:final_idx]]
     
 
 parser = argparse.ArgumentParser(

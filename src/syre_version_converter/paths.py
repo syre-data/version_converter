@@ -7,6 +7,8 @@ PROJECT_MANIFEST_FILE = "project_manifest.json"
 LOCAL_CONFIG_FILE = "local_config.json"
 PROJECT_PROPERTIES_FILE = "project.json"
 PROJECT_ANALYSES_FILE = "analyses.json"
+PROJECT_DESKTOP_SETTINGS_FILE  = "desktop_settings.json"
+PROJECT_RUNNER_SETTINGS_FILE  = "runner_settings.json"
 PROJECT_SETTINGS_FILE = "project_settings.json"
 CONTAINER_PROPERTIES_FILE = "container.json"
 CONTAINER_SETTINGS_FILE = "container_settings.json"
@@ -85,7 +87,7 @@ def config_user_manifest() -> str:
     """
     Returns:
         str: Path to the Syre user manifest file.
-    """    
+    """
     system = get_system()
     if system == "Windows":
         return os.path.join(config_local_dir(), "config", USER_MANIFEST_FILE)
@@ -109,7 +111,6 @@ def config_project_manifest() -> str:
     raise RuntimeError("Could not get Syre project manifest for OS")
 
 
-
 def config_local_settings() -> str:
     """
     Returns:
@@ -124,16 +125,27 @@ def config_local_settings() -> str:
     raise RuntimeError("Could not get Syre local config for OS")
 
 
+def syre_dir_of(base_path: str) -> str:
+    """Syre folder of the base directory.
+
+    Args:
+        base_path (str): Base path.
+
+    Returns:
+        str: Path to the `syre` folder
+    """
+    return os.path.join(base_path, SYRE_FOLDER)
+
 def project_properties_of(base_path: str) -> str:
     """Project properties file of the base path.
 
     Args:
-        base_path (str): Path tot eh project's root folder.
+        base_path (str): Path to the project's root folder.
 
     Returns:
         str: Path to the project's properties file.
     """
-    return os.path.join(base_path, SYRE_FOLDER, PROJECT_PROPERTIES_FILE)
+    return os.path.join(syre_dir_of(base_path), PROJECT_PROPERTIES_FILE)
 
 
 def project_analyses_of(base_path: str) -> str:
@@ -145,7 +157,7 @@ def project_analyses_of(base_path: str) -> str:
     Returns:
         str: Path to the project's analyses file.
     """
-    return os.path.join(base_path, SYRE_FOLDER, PROJECT_ANALYSES_FILE)
+    return os.path.join(syre_dir_of(base_path), PROJECT_ANALYSES_FILE)
 
 
 def project_settings_of(base_path: str) -> str:
@@ -157,7 +169,31 @@ def project_settings_of(base_path: str) -> str:
     Returns:
         str: Path to the project's settings file.
     """
-    return os.path.join(base_path, SYRE_FOLDER, PROJECT_SETTINGS_FILE)
+    return os.path.join(syre_dir_of(base_path), PROJECT_SETTINGS_FILE)
+
+
+def project_desktop_settings_of(base_path: str) -> str:
+    """Project desktop settings file of the base path.
+
+    Args:
+        base_path (str): Path to the project's root folder.
+
+    Returns:
+        str: Path to the project's desktop settings file.
+    """
+    return os.path.join(syre_dir_of(base_path), PROJECT_DESKTOP_SETTINGS_FILE)
+
+
+def project_runner_settings_of(base_path: str) -> str:
+    """Project runner settings file of the base path.
+
+    Args:
+        base_path (str): Path to the project's root folder.
+
+    Returns:
+        str: Path to the project's runner file.
+    """
+    return os.path.join(syre_dir_of(base_path), PROJECT_RUNNER_SETTINGS_FILE)
 
 
 def container_properties() -> str:

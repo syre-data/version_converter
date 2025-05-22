@@ -25,6 +25,13 @@ Converts Syre versions.
 python -m syre_version_converter <initial_version> <final_version> [-p </path/to/project>]
 ```
 
+### Available versions
++ **0.9.x:** Anything before `0.10.0`
++ `0.10.0`
++ `0.10.1`
++ `0.10.1`
++ `0.11.0`
+
 ## License
 
 `syre-version-converter` is distributed under the terms of the [MIT](https://spdx.org/licenses/MIT.html) license.

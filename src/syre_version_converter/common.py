@@ -35,6 +35,14 @@ def project_paths() -> list[str]:
 
     return projects
 
+def current_user() -> Optional[str]:
+    """
+    Returns:
+        Optional[str]: Current user.
+    """
+    with open(paths.config_local_settings(), "r") as f:
+        config = json.load(f)
+        return config["user"]
 
 def json_overwrite(obj: Any, f: io.TextIOWrapper):
     """Overwrite a file's contents with the JSON serialization of the object.
